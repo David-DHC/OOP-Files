@@ -1,0 +1,145 @@
+优化前：
+A constructing...B::data1
+=======entering main=======
+=======entering work=======
+A constructing...b
+A constructing...t.data2
+B constructing...t
+A constructing...f[0]
+A constructing...f[1]
+
+------before call------
+A move constructing...b
+------after call------
+A constructing...f
+------before return------
+A copy constructing...return value
+A move constructing...testC
+A destructing...return value
+A destructing...b
+------after return------  // static f, testC
+
+------before call------
+------after call------
+------before return------
+------after return------
+
+
+------before call------
+A move constructing...b
+------after call------
+------before return------
+A copy constructing...return value
+A move constructing...testD
+A destructing...return value
+A destructing...b
+------after return------ // testD
+
+
+------before call------
+------after call------
+A copy constructing...f
+------before return------
+A move constructing...return value
+A destructing...f
+A move constructing...testF
+A destructing...return value
+------after return------ // test F
+
+
+------before call------
+A move constructing...b
+------after call------
+A move constructing...f
+------before return------
+A move constructing...return value
+A destructing...f
+A move constructing...testA
+A destructing...return value
+A destructing...b
+------after return------ // test A
+
+
+------before call------
+------after call------
+------before return------
+------after return------
+
+=======exiting work=======
+A destructing...testA
+A destructing...testF
+A destructing...testD
+A destructing...testC
+A destructing...f[1]
+A destructing...f[0]
+B destructing...t
+A destructing...t.data2
+A destructing...b
+=======exiting main=======
+A destructing...f
+A destructing...B::data1
+
+优化后：
+A constructing...B::data1
+=======entering main=======
+=======entering work=======
+A constructing...
+A constructing...
+B constructing...
+A constructing...
+A constructing...
+
+------before call------
+A move constructing...b
+------after call------
+A constructing...f
+------before return------
+A copy constructing...testC
+A destructing...b
+------after return------
+
+------before call------
+------after call------
+------before return------
+------after return------
+
+------before call------
+A move constructing...b
+------after call------
+------before return------
+A copy constructing...testD
+A destructing...b
+------after return------
+
+------before call------
+------after call------
+A copy constructing...testF
+------before return------
+------after return------
+
+------before call------
+A move constructing...b
+------after call------
+A move constructing...testA
+------before return------
+A destructing...b
+------after return------
+
+------before call------
+------after call------
+------before return------
+------after return------
+
+=======exiting work=======
+A destructing...testA
+A destructing...testF
+A destructing...testD
+A destructing...testC
+A destructing...f[1]
+A destructing...f[0]
+B destructing...t
+A destructing...t.data2
+A destructing...b
+=======exiting main=======
+A destructing...f
+A destructing...B::data1
